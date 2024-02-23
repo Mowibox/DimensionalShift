@@ -1,8 +1,8 @@
 # Dimensional Shift
 Video game project developed on Unity for the Image &amp; Virtual Reality workshop.
 
-<div style="text-align: center;">
-    <img src="Icon.png" alt="DimensionalShift" width="250">
+<div class="text-center">
+    <img src="Icon.png" alt="DimensionalShift" width="200">
 </div>
 
 ## About the game
