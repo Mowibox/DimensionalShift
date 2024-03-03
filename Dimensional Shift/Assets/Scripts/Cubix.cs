@@ -30,10 +30,32 @@ public class Cubix : MonoBehaviour
 
     //Gestion de la camera
     public static float cameraAnimation = 1f;
-    private Vector3 cameraGoal2D = new Vector3(4.94f, 1.84f, -5.84f);
+    private Vector3 cameraGoal2D = new Vector3(8.6f, 3.7f, -5.84f);
     private Vector3 cameraRotationGoal2D = new Vector3(0f, 0f, 0f);
-    private Vector3 cameraGoal3D = new Vector3(0.5f, 5.7f, -2.6f);
-    private Vector3 cameraRotationGoal3D = new Vector3(44f, 30f, 0f);
+    private Vector3 cameraGoal3D = new Vector3(0f, 9.6f, -3f);
+    private Vector3 cameraRotationGoal3D = new Vector3(51f, 50f, 11f);
+
+    //Gestion de la rotation
+    public static float rotationAnimation = 1f;
+    public static int rotation = 0;
+    private static float cubixRotation = 0f;
+    private static float cubixRotationGoal;
+    private Vector3[] cameraRotationPosition = new Vector3[]
+    {
+        new Vector3(0f, 9.6f, -3f),
+        new Vector3(18f, 11f, -3f),
+        new Vector3(18f, 11f, 10f),
+        new Vector3(-2.5f, 11f, 8f)
+    };
+
+    private Vector3[] cameraRotationAngle = new Vector3[]
+    {
+        new Vector3(51f, 50f, 11f),
+        new Vector3(52f, 324f, 12f),
+        new Vector3(52f, 228f, 12f),
+        new Vector3(52f, 121f, 12f)
+    };
+
 
 
     // Start is called before the first frame update
@@ -88,7 +110,16 @@ public class Cubix : MonoBehaviour
 
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.P) && mode == dim3)
+        {
+            cubixRotation = cubixRotationGoal;
+            cubixRotationGoal += 90f;
+            SpaceRotation();
+
+        }
+
+        Debug.Log(rotation);
+
     }
 
 
@@ -98,11 +129,51 @@ public class Cubix : MonoBehaviour
 
         if (mode == dim2)
         {
-            rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, 0);
+            if (rotation == 0)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, 0);
+            }
+
+            else if (rotation == 1)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(0, rigidbodyComponentCubix.velocity.y, -movingSpeed * horizontalInput);
+            }
+
+            else if (rotation == 2)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(-movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, 0);
+            }
+
+            else if (rotation == 3)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(0, rigidbodyComponentCubix.velocity.y, movingSpeed * horizontalInput);
+            }
+
         }
         else if (mode == dim3)
         {
-            rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, movingSpeed * verticalInput);
+            if (rotation == 0)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, movingSpeed * verticalInput);
+            }
+
+            else if (rotation == 1)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * verticalInput, rigidbodyComponentCubix.velocity.y,- movingSpeed * horizontalInput);
+            }
+
+            else if (rotation == 2)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(-movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, -movingSpeed * verticalInput);
+
+            }
+
+            else if (rotation == 3)
+            {
+                rigidbodyComponentCubix.velocity = new Vector3(-movingSpeed * verticalInput, rigidbodyComponentCubix.velocity.y, movingSpeed * horizontalInput);
+            }
+
+
         }
 
         if (jumpKeyWasPressed)
@@ -156,6 +227,12 @@ public class Cubix : MonoBehaviour
     {
         cameraAnimation = 0f;
         mode = (mode + 1) % 2;
+    }
+
+    private void SpaceRotation()
+    {
+        rotationAnimation = 0f;
+        rotation = (rotation + 1) % 4;
     }
 
     //Conditions de reinitialisation du niveau
@@ -213,6 +290,14 @@ public class Cubix : MonoBehaviour
                 rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(0f, 360f, cameraAnimation), 0);
             }
         }
+
+        if (rotationAnimation <= 1f)
+        {
+            rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(cubixRotation, cubixRotationGoal, rotationAnimation), 0);
+
+        }
+
+        rotationAnimation += 0.015f;
     }
 
     private void Jump()
@@ -245,7 +330,7 @@ public class Cubix : MonoBehaviour
                     Mathf.Lerp(cameraRotationGoal3D.z, cameraRotationGoal2D.z, cameraAnimation));
 
                 Camera.main.orthographic = true;
-                Camera.main.orthographicSize = 2.35f;
+                Camera.main.orthographicSize = 3.9f;
 
             }
 
@@ -264,12 +349,28 @@ public class Cubix : MonoBehaviour
                 
                 Camera.main.orthographic = false;
 
+                
             }
 
             cameraAnimation += 0.015f;
         }
-       
+
+        if (mode == dim3 && rotationAnimation <= 1f)
+        {
+            cameraPosition.x = Mathf.Lerp(cameraRotationPosition[rotation].x, cameraRotationPosition[(rotation + 1) % 4].x, rotationAnimation);
+            cameraPosition.y = Mathf.Lerp(cameraRotationPosition[rotation].y, cameraRotationPosition[(rotation + 1) % 4].y, rotationAnimation);
+            cameraPosition.z = Mathf.Lerp(cameraRotationPosition[rotation].z, cameraRotationPosition[(rotation + 1) % 4].z, rotationAnimation);
+            Camera.main.transform.position = cameraPosition;
+
+            Camera.main.transform.rotation = Quaternion.Euler(
+                Mathf.Lerp(cameraRotationAngle[rotation].x, cameraRotationAngle[(rotation + 1) % 4].x, rotationAnimation),
+                Mathf.Lerp(cameraRotationAngle[rotation].y, cameraRotationAngle[(rotation + 1) % 4].y, rotationAnimation),
+                Mathf.Lerp(cameraRotationAngle[rotation].z, cameraRotationAngle[(rotation + 1) % 4].z, rotationAnimation));
+
+        }
     }
+
+    
 
 
 }
