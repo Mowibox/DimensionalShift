@@ -42,20 +42,15 @@ public class Cubix : MonoBehaviour
     private static float cubixRotationGoal;
     private Vector3[] cameraRotationPosition = new Vector3[]
     {
-        new Vector3(0f, 9.6f, -3f),
-        new Vector3(18f, 11f, -3f),
-        new Vector3(18f, 11f, 10f),
-        new Vector3(-2.5f, 11f, 8f)
+        new Vector3(20f, 11f, -0.2f),
+        new Vector3(2.65f, 10f, -3.8f),
+        new Vector3(-2.9f, 11f, 8.2f),
+        new Vector3(15.2f, 11f, 11.6f)
     };
 
-    private Vector3[] cameraRotationAngle = new Vector3[]
-    {
-        new Vector3(51f, 50f, 11f),
-        new Vector3(52f, 324f, 12f),
-        new Vector3(52f, 228f, 12f),
-        new Vector3(52f, 121f, 12f)
-    };
-
+    private static float cameraRotation;
+    private static float cameraRotationGoal;
+    private static float cameraRotationOffset = 30f;
 
 
     // Start is called before the first frame update
@@ -112,8 +107,14 @@ public class Cubix : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P) && mode == dim3)
         {
+            //Rotation spatiale de 90°
             cubixRotation = cubixRotationGoal;
             cubixRotationGoal += 90f;
+
+
+            cameraRotation = cameraRotationGoal+cameraRotationOffset;
+            cameraRotationGoal += 90f;
+
             SpaceRotation();
 
         }
@@ -126,24 +127,21 @@ public class Cubix : MonoBehaviour
     //FixedUpdate is called once every physic update
     private void FixedUpdate()
     {
-
+        //Redefinition des directions de deplacements en fonction de la rotation de la scene 
         if (mode == dim2)
         {
             if (rotation == 0)
             {
                 rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, 0);
             }
-
             else if (rotation == 1)
             {
                 rigidbodyComponentCubix.velocity = new Vector3(0, rigidbodyComponentCubix.velocity.y, -movingSpeed * horizontalInput);
             }
-
             else if (rotation == 2)
             {
                 rigidbodyComponentCubix.velocity = new Vector3(-movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, 0);
             }
-
             else if (rotation == 3)
             {
                 rigidbodyComponentCubix.velocity = new Vector3(0, rigidbodyComponentCubix.velocity.y, movingSpeed * horizontalInput);
@@ -156,31 +154,28 @@ public class Cubix : MonoBehaviour
             {
                 rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, movingSpeed * verticalInput);
             }
-
             else if (rotation == 1)
             {
                 rigidbodyComponentCubix.velocity = new Vector3(movingSpeed * verticalInput, rigidbodyComponentCubix.velocity.y,- movingSpeed * horizontalInput);
             }
-
             else if (rotation == 2)
             {
                 rigidbodyComponentCubix.velocity = new Vector3(-movingSpeed * horizontalInput, rigidbodyComponentCubix.velocity.y, -movingSpeed * verticalInput);
-
             }
-
             else if (rotation == 3)
             {
                 rigidbodyComponentCubix.velocity = new Vector3(-movingSpeed * verticalInput, rigidbodyComponentCubix.velocity.y, movingSpeed * horizontalInput);
             }
 
-
         }
+
 
         if (jumpKeyWasPressed)
         {
             Jump();
         }
         
+
     }
 
     
@@ -229,6 +224,7 @@ public class Cubix : MonoBehaviour
         mode = (mode + 1) % 2;
     }
 
+    //Rotation de la scene
     private void SpaceRotation()
     {
         rotationAnimation = 0f;
@@ -362,10 +358,8 @@ public class Cubix : MonoBehaviour
             cameraPosition.z = Mathf.Lerp(cameraRotationPosition[rotation].z, cameraRotationPosition[(rotation + 1) % 4].z, rotationAnimation);
             Camera.main.transform.position = cameraPosition;
 
-            Camera.main.transform.rotation = Quaternion.Euler(
-                Mathf.Lerp(cameraRotationAngle[rotation].x, cameraRotationAngle[(rotation + 1) % 4].x, rotationAnimation),
-                Mathf.Lerp(cameraRotationAngle[rotation].y, cameraRotationAngle[(rotation + 1) % 4].y, rotationAnimation),
-                Mathf.Lerp(cameraRotationAngle[rotation].z, cameraRotationAngle[(rotation + 1) % 4].z, rotationAnimation));
+
+            Camera.main.transform.rotation = Quaternion.Euler(51f, Mathf.Lerp(cameraRotation, cameraRotationGoal+cameraRotationOffset, rotationAnimation), 11f);
 
         }
     }
