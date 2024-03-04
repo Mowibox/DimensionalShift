@@ -30,10 +30,31 @@ public class Cubix : MonoBehaviour
 
     //Gestion de la camera
     public static float cameraAnimation = 1f;
-    private Vector3 cameraGoal2D = new Vector3(8.6f, 3.7f, -5.84f);
-    private Vector3 cameraRotationGoal2D = new Vector3(0f, 0f, 0f);
-    private Vector3 cameraGoal3D = new Vector3(0f, 9.6f, -3f);
-    private Vector3 cameraRotationGoal3D = new Vector3(51f, 50f, 11f);
+    private Vector3[] cameraGoal2D = new Vector3[]{ 
+        new Vector3(8.4f, 3.7f, -5.84f),
+        new Vector3(-8.6f, 3.7f, 3.92f),
+        new Vector3(8.9f, 4f, 58f),
+        new Vector3(44.7f, 3.7f, 3.74f)
+    };
+    private Vector3[] cameraRotationGoal2D = new Vector3[]{
+        new Vector3(0f, 0f, 0f),
+        new Vector3(0f, 90f, 0f),
+        new Vector3(0f, 180f, 0f), 
+        new Vector3(0f, 270f, 0f)
+    };
+
+    private Vector3[] cameraGoal3D = new Vector3[]{
+        new Vector3(0f, 9.6f, -3f),
+        new Vector3(-1.17f, 10f, 9.6f),
+        new Vector3(17.19f, 11f, 11.37f),
+        new Vector3(18.2f, 11f, -2.75f)
+    };
+    private Vector3[] cameraRotationGoal3D = new Vector3[]{
+        new Vector3(51f, 50f, 11f),
+        new Vector3(51f, 140f, 11f),
+        new Vector3(51f, 230f, 11f),
+        new Vector3(51f, 320f, 11f)
+    };
 
     //Gestion de la rotation
     public static float rotationAnimation = 1f;
@@ -237,9 +258,38 @@ public class Cubix : MonoBehaviour
         positionCubix.y = rigidbodyComponentCubix.position.y;
         if (positionCubix.y <= -10 || Input.GetKeyDown(KeyCode.R))
         {
-            positionCubix.x = 0f;
-            positionCubix.y = 5f;
-            positionCubix.z = 0f;
+            if (mode == dim2)
+            {
+                if (rotation == 0 || rotation == 1)
+                {
+                    positionCubix.x = 0f;
+                    positionCubix.y = 5f;
+                    positionCubix.z = 0f;
+
+                }
+                else if (rotation == 2)
+                {
+                    positionCubix.x = 0f;
+                    positionCubix.y = 5f;
+                    positionCubix.z = 8f;
+
+                }
+                else if (rotation == 3)
+                {
+                    positionCubix.x = 17f;
+                    positionCubix.y = 5f;
+                    positionCubix.z = 0f;
+
+                }
+
+            }
+            else if (mode == dim3)
+            {
+                positionCubix.x = 0f;
+                positionCubix.y = 5f;
+                positionCubix.z = 0f;
+            }
+            
             rigidbodyComponentCubix.position = positionCubix;
         }
     }
@@ -270,20 +320,82 @@ public class Cubix : MonoBehaviour
         {
             if (mode == dim2)
             {
-                positionCubix.x = rigidbodyComponentCubix.position.x;
-                positionCubix.y = rigidbodyComponentCubix.position.y;
-                positionCubix.z = Mathf.Lerp(GroundTransform.zPos2Dto3D, 0f, cameraAnimation);
-                rigidbodyComponentCubix.position = positionCubix;
-                rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(360f, 0f, cameraAnimation), 0);
+                if (rotation == 0) {
+                    positionCubix.x = rigidbodyComponentCubix.position.x;
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = Mathf.Lerp(GroundTransform.originPos2Dto3D, 0f, cameraAnimation);
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(360f, 0f, cameraAnimation), 0);
+
+                }
+                else if (rotation == 1)
+                {
+                    positionCubix.x = Mathf.Lerp(GroundTransform.originPos2Dto3D, 0f, cameraAnimation);
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = rigidbodyComponentCubix.position.z;
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(450f, 90f, cameraAnimation), 0);
+
+                }
+                else if (rotation == 2)
+                {
+                    positionCubix.x = rigidbodyComponentCubix.position.x;
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = Mathf.Lerp(GroundTransform.originPos2Dto3D, 8f, cameraAnimation);
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(540f, 180f, cameraAnimation), 0);
+
+                }
+                else if (rotation == 3)
+                {
+                    positionCubix.x = Mathf.Lerp(GroundTransform.originPos2Dto3D, 17f, cameraAnimation);
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = rigidbodyComponentCubix.position.z;
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(630f, 270f, cameraAnimation), 0);
+
+                }
+
             }
 
             else if (mode == dim3)
             {
-                positionCubix.x = rigidbodyComponentCubix.position.x;
-                positionCubix.y = rigidbodyComponentCubix.position.y;
-                positionCubix.z = Mathf.Lerp(0f, GroundTransform.zPos2Dto3D, cameraAnimation);
-                rigidbodyComponentCubix.position = positionCubix;
-                rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(0f, 360f, cameraAnimation), 0);
+                if (rotation == 0)
+                {
+                    positionCubix.x = rigidbodyComponentCubix.position.x;
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = Mathf.Lerp(0f, GroundTransform.originPos2Dto3D, cameraAnimation);
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(0f, 360f, cameraAnimation), 0);
+
+                }
+                else if (rotation == 1)
+                {
+                    positionCubix.x = Mathf.Lerp(0f, GroundTransform.originPos2Dto3D, cameraAnimation);
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = rigidbodyComponentCubix.position.z;
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(90f, 450f, cameraAnimation), 0);
+
+                }
+                else if (rotation == 2)
+                {
+                    positionCubix.x = rigidbodyComponentCubix.position.x;
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = Mathf.Lerp(8f, GroundTransform.originPos2Dto3D, cameraAnimation);
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(180f, 540f, cameraAnimation), 0);
+
+                }
+                else if (rotation == 3)
+                {
+                    positionCubix.x = Mathf.Lerp(17f, GroundTransform.originPos2Dto3D, cameraAnimation);
+                    positionCubix.y = rigidbodyComponentCubix.position.y;
+                    positionCubix.z = rigidbodyComponentCubix.position.z;
+                    rigidbodyComponentCubix.position = positionCubix;
+                    rigidbodyComponentCubix.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(270f, 630f, cameraAnimation), 0);
+
+                }
             }
         }
 
@@ -315,15 +427,15 @@ public class Cubix : MonoBehaviour
         {
             if (mode == dim2)
             {
-                cameraPosition.x = Mathf.Lerp(cameraGoal3D.x, cameraGoal2D.x, cameraAnimation);
-                cameraPosition.y = Mathf.Lerp(cameraGoal3D.y, cameraGoal2D.y, cameraAnimation);
-                cameraPosition.z = Mathf.Lerp(cameraGoal3D.z, cameraGoal2D.z, cameraAnimation);
+                cameraPosition.x = Mathf.Lerp(cameraGoal3D[rotation].x, cameraGoal2D[rotation].x, cameraAnimation);
+                cameraPosition.y = Mathf.Lerp(cameraGoal3D[rotation].y, cameraGoal2D[rotation].y, cameraAnimation);
+                cameraPosition.z = Mathf.Lerp(cameraGoal3D[rotation].z, cameraGoal2D[rotation].z, cameraAnimation);
                 Camera.main.transform.position = cameraPosition;
 
                 Camera.main.transform.rotation = Quaternion.Euler(
-                    Mathf.Lerp(cameraRotationGoal3D.x, cameraRotationGoal2D.x, cameraAnimation),
-                    Mathf.Lerp(cameraRotationGoal3D.y, cameraRotationGoal2D.y, cameraAnimation),
-                    Mathf.Lerp(cameraRotationGoal3D.z, cameraRotationGoal2D.z, cameraAnimation));
+                    Mathf.Lerp(cameraRotationGoal3D[rotation].x, cameraRotationGoal2D[rotation].x, cameraAnimation),
+                    Mathf.Lerp(cameraRotationGoal3D[rotation].y, cameraRotationGoal2D[rotation].y, cameraAnimation),
+                    Mathf.Lerp(cameraRotationGoal3D[rotation].z, cameraRotationGoal2D[rotation].z, cameraAnimation));
 
                 Camera.main.orthographic = true;
                 Camera.main.orthographicSize = 3.9f;
@@ -333,15 +445,15 @@ public class Cubix : MonoBehaviour
             else if (mode == dim3)
             {
 
-                cameraPosition.x = Mathf.Lerp(cameraGoal2D.x, cameraGoal3D.x, cameraAnimation);
-                cameraPosition.y = Mathf.Lerp(cameraGoal2D.y, cameraGoal3D.y, cameraAnimation);
-                cameraPosition.z = Mathf.Lerp(cameraGoal2D.z, cameraGoal3D.z, cameraAnimation);
+                cameraPosition.x = Mathf.Lerp(cameraGoal2D[rotation].x, cameraGoal3D[rotation].x, cameraAnimation);
+                cameraPosition.y = Mathf.Lerp(cameraGoal2D[rotation].y, cameraGoal3D[rotation].y, cameraAnimation);
+                cameraPosition.z = Mathf.Lerp(cameraGoal2D[rotation].z, cameraGoal3D[rotation].z, cameraAnimation);
                 Camera.main.transform.position = cameraPosition;
 
                 Camera.main.transform.rotation = Quaternion.Euler(
-                    Mathf.Lerp(cameraRotationGoal2D.x, cameraRotationGoal3D.x, cameraAnimation),
-                    Mathf.Lerp(cameraRotationGoal2D.y, cameraRotationGoal3D.y, cameraAnimation),
-                    Mathf.Lerp(cameraRotationGoal2D.z, cameraRotationGoal3D.z, cameraAnimation));
+                    Mathf.Lerp(cameraRotationGoal2D[rotation].x, cameraRotationGoal3D[rotation].x, cameraAnimation),
+                    Mathf.Lerp(cameraRotationGoal2D[rotation].y, cameraRotationGoal3D[rotation].y, cameraAnimation),
+                    Mathf.Lerp(cameraRotationGoal2D[rotation].z, cameraRotationGoal3D[rotation].z, cameraAnimation));
                 
                 Camera.main.orthographic = false;
 
