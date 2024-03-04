@@ -12,7 +12,7 @@ public class Cubix : MonoBehaviour
     private Vector3 positionCubix;
     public static RaycastHit raycastCubix;
 
-    //Gestion des collisions
+    //Gestion des collisions avec le sol
     [SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask cubixMask;
 
