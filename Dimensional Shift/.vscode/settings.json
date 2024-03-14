@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Unity Basics.sln"
+    "dotnet.defaultSolution": "Dimensional Shift.sln"
 }
