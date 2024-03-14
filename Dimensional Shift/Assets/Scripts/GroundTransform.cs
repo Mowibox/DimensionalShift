@@ -10,7 +10,7 @@ public class GroundTransform : MonoBehaviour
     private Rigidbody rigidbodyComponentPlatform;
     private Vector3 platformPos3D, platformPos2D;
     public static float originPos2Dto3D;
-
+    public static float originPos2Dto3DCube;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +36,10 @@ public class GroundTransform : MonoBehaviour
                 {
                     originPos2Dto3D = platformPos3D.z;
                 }
+                else if (rigidbodyComponentPlatform.tag == "UnderCube")
+                {
+                    originPos2Dto3DCube = platformPos3D.z;
+                }
 
             }
 
@@ -47,6 +51,10 @@ public class GroundTransform : MonoBehaviour
                 if (rigidbodyComponentPlatform.tag == "UnderCubix")
                 {
                     originPos2Dto3D = platformPos3D.x;
+                }
+                else if (rigidbodyComponentPlatform.tag == "UnderCube")
+                {
+                    originPos2Dto3DCube = platformPos3D.x;
                 }
 
             }
@@ -60,6 +68,10 @@ public class GroundTransform : MonoBehaviour
                 {
                     originPos2Dto3D = platformPos3D.z;
                 }
+                else if (rigidbodyComponentPlatform.tag == "UnderCube")
+                {
+                    originPos2Dto3DCube = platformPos3D.z;
+                }
 
             }
 
@@ -71,6 +83,10 @@ public class GroundTransform : MonoBehaviour
                 if (rigidbodyComponentPlatform.tag == "UnderCubix")
                 {
                     originPos2Dto3D = platformPos3D.x;
+                }
+                else if (rigidbodyComponentPlatform.tag == "UnderCube")
+                {
+                    originPos2Dto3DCube = platformPos3D.x;
                 }
 
             }

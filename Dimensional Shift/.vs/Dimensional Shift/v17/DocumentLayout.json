@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\assets\\scripts\\box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|c:\\workspace\\git_folders\\dimensionalshift\\dimensional shift\\assets\\scripts\\cubix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cubix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\assets\\scripts\\groundtransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\groundtransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|c:\\workspace\\git_folders\\dimensionalshift\\dimensional shift\\assets\\scripts\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Materials\\NewUnlitShader.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Materials\\NewUnlitShader.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\assets\\scripts\\groundtransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76EE9065-E0AF-81C9-4C88-585D5DE21083}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\groundtransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,40 +26,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "NewUnlitShader.shader",
-              "DocumentMoniker": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Materials\\NewUnlitShader.shader",
-              "RelativeDocumentMoniker": "Assets\\Materials\\NewUnlitShader.shader",
-              "ToolTip": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Materials\\NewUnlitShader.shader",
-              "RelativeToolTip": "Assets\\Materials\\NewUnlitShader.shader",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2024-02-29T22:35:20.896Z"
+              "Title": "Goal.cs",
+              "DocumentMoniker": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\Goal.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Goal.cs",
+              "ToolTip": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\Goal.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Goal.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAowBYAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-14T09:26:47.262Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "Box.cs",
+              "DocumentMoniker": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\Box.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Box.cs",
+              "ToolTip": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\Box.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Box.cs",
+              "ViewState": "AQIAALwAAAAAAAAAAAAIwNQAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T09:56:07.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "GroundTransform.cs",
               "DocumentMoniker": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\GroundTransform.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GroundTransform.cs",
               "ToolTip": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\GroundTransform.cs",
               "RelativeToolTip": "Assets\\Scripts\\GroundTransform.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAYwEMAAABAAAAA",
+              "ViewState": "AQIAACcAAAAAAAAAAAAYwDIAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T07:22:13.287Z"
+              "WhenOpened": "2024-02-26T07:22:13.287Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Cubix.cs",
               "DocumentMoniker": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\Cubix.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Cubix.cs",
               "ToolTip": "C:\\Workspace\\Git_folders\\DimensionalShift\\Dimensional Shift\\Assets\\Scripts\\Cubix.cs",
               "RelativeToolTip": "Assets\\Scripts\\Cubix.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJwAAAANAAAA",
+              "ViewState": "AQIAAOMAAAAAAAAAAAAqwBUBAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-22T21:31:45.2Z",
               "EditorCaption": ""

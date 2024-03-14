@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 //Classe du personnage : Cubix
 public class Cubix : MonoBehaviour
 {
     //Objet et position de Cubix
-    private Rigidbody rigidbodyComponentCubix;
+    public static Rigidbody rigidbodyComponentCubix;
     private Vector3 positionCubix;
     public static RaycastHit raycastCubix;
 
@@ -73,7 +75,6 @@ public class Cubix : MonoBehaviour
     private static float cameraRotationGoal;
     private static float cameraRotationOffset = 30f;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -107,12 +108,12 @@ public class Cubix : MonoBehaviour
         //Identification de la plateforme sous Cubix
         if (Physics.Raycast(transform.position, Vector3.down, out raycastCubix, Mathf.Infinity))
         {
-            if (raycastCubix.collider.CompareTag("Platform"))
+            if (raycastCubix.collider.CompareTag("Platform") && !(raycastCubix.collider.gameObject.tag == "Box"))
             {
                 raycastCubix.collider.tag = "UnderCubix";
             }
 
-            if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, cubixMask).Length == 0)
+            if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, cubixMask).Length == 0 && !(raycastCubix.collider.gameObject.tag == "Box"))
             {
                 raycastCubix.collider.tag = "Platform";
             }
@@ -140,7 +141,7 @@ public class Cubix : MonoBehaviour
 
         }
 
-        Debug.Log(rotation);
+        Debug.Log(Box.cubeIsHolded);
 
     }
 
@@ -202,39 +203,23 @@ public class Cubix : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        //Contact avec une boite
+        //Contact avec une piece (a utiliser plus tard)
         if (other.gameObject.layer == 7)
         {
             Destroy(other.gameObject);
 
         }
 
-        //Contact avec une zone de fin de jeu
-        if (other.gameObject.layer == 8)
-        {   
-            Renderer renderer = other.gameObject.GetComponent<Renderer>();
-            renderer.material.color = Color.green;
-        }
-
-
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        //Sortie de contact
-        if (other.gameObject.layer == 8)
-        {
-            Renderer renderer = other.gameObject.GetComponent<Renderer>();
-            renderer.material.color = Color.red;
-        }
-
-    }
-
-
+    
     private void OnCollisionExit(Collision collision)
     {
-        collision.gameObject.tag = "Platform";
-        
+        if(!(collision.gameObject.tag == "Box"))
+        {
+            collision.gameObject.tag = "Platform";
+        }
+
     }
 
 
@@ -293,6 +278,8 @@ public class Cubix : MonoBehaviour
             rigidbodyComponentCubix.position = positionCubix;
         }
     }
+
+    
 
     //Deformation du cube personnage pour animer ses mouvements
     private void CubixAnimation()
@@ -477,6 +464,6 @@ public class Cubix : MonoBehaviour
     }
 
     
-
+    
 
 }
